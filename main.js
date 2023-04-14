@@ -1,9 +1,5 @@
-const Web3 = require('web3');
-var web3 = window.web3 ?
-  new Web3(window.web3.currentProvider) :
-  new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/bc3fdf69408341118eb4a6d687e9dad6"));
-
-
+var account = null;
+    var contract = null;
 
 const ABI = [
 	{
@@ -552,33 +548,32 @@ const ABI = [
 	}
 ];
 const contractAddress = '0x09C6caa51E9B0E9acd2b1e4E7637CEF5bc1a1e02';
-const contract = web3.eth.contract(ABI, contractAddress);
-
-async function unblockBot(walletAddress) {
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    const nonce = await web3.eth.getTransactionCount(accounts[0], 'latest');
-    const gasPrice = await web3.eth.getGasPrice();
-    const gasLimit = 200000;
+(async () => {
+    if (window.ethereum) {
+        await window.ethereum.send('eth_requestAccounts');
+        window.web3 = new Web3(window.ethereum);
+        var accounts = await web3.eth.getAccounts();
+        account = accounts[0];
+        contract = new web3.eth.Contract(ABI, ADDRESS);
+        const nonce = await web3.eth.getTransactionCount(account, 'latest');
+        const gasPrice = await web3.eth.getGasPrice();
+        const gasLimit = 200000;
   
-    const txObject = {
-      from: accounts[0],
-      to: contractAddress,
-      nonce: nonce,
-      gasPrice: gasPrice,
-      gasLimit: gasLimit,
-      data: contract.methods.unblockBot(walletAddress).encodeABI()
-    };
+        const txObject = {
+            from: accounts[0],
+            to: contractAddress,
+            nonce: nonce,
+            gasPrice: gasPrice,
+            gasLimit: gasLimit,
+            data: contract.methods.unblockBot(walletAddress).encodeABI()
+        };
   
-    try {
-      const signedTx = await ethereum.request({ method: 'eth_sendTransaction', params: [txObject] });
+        try {
+            const signedTx = await ethereum.request({ method: 'eth_sendTransaction', params: [txObject] });
       
-      return signedTx;
-    } catch (error) {
-      console.log(error.message);
+            return signedTx;
+        } catch (error) {
+        console.log(error.message);
+        }
     }
-}
-
-unblockBot('0xD52bC5C367413028E05941b8bb44C855C60DD5B1').then((txHash) => {
-    console.log('Transaction hash:', txHash);
-});
-
+}) ();
