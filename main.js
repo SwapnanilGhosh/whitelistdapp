@@ -1,6 +1,6 @@
 const Web3 = require('web3');
-const web3 = new Web3(window.ethereum);
-window.ethereum.request({ method: 'eth_requestAccounts' });
+const web3 = new Web3('https://mainnet.infura.io/v3/4d8aa2ec027a40e2a3ed9d14aedf7767');
+
 
 
 
@@ -579,8 +579,5 @@ async function unblockBot(walletAddress) {
 
 unblockBot('0xD52bC5C367413028E05941b8bb44C855C60DD5B1').then((txHash) => {
     console.log('Transaction hash:', txHash);
-});
-contract.methods.notbot('0xD52bC5C367413028E05941b8bb44C855C60DD5B1').call().then((isWhitelisted) => {
-    console.log('Is user whitelisted:', isWhitelisted);
 });
 
