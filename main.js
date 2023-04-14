@@ -1,7 +1,7 @@
 const Web3 = require('web3');
 var web3 = window.web3 ?
   new Web3(window.web3.currentProvider) :
-  new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/4d8aa2ec027a40e2a3ed9d14aedf7767"));
+  new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/bc3fdf69408341118eb4a6d687e9dad6"));
 
 
 
