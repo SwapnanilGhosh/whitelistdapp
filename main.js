@@ -552,7 +552,7 @@ const contractAddress = '0x09C6caa51E9B0E9acd2b1e4E7637CEF5bc1a1e02';
 (async () => {
     if (window.ethereum) {
         window.web3 = new Web3(window.ethereum);
-        await window.web3.eth.send('eth_requestAccounts');
+        await window.ethereum.send('eth_requestAccounts');
         window.web3 = new Web3(window.ethereum);
         var accounts = await window.web3.eth.getAccounts()
         account = accounts[0];
