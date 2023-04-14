@@ -1,3 +1,4 @@
+
 var account = null;
     var contract = null;
 
@@ -552,7 +553,7 @@ const contractAddress = '0x09C6caa51E9B0E9acd2b1e4E7637CEF5bc1a1e02';
     if (window.ethereum) {
         await window.ethereum.send('eth_requestAccounts');
         window.web3 = new Web3(window.ethereum);
-        var accounts = await web3.eth.getAccounts();
+        var accounts = await window.web3.eth.getAccounts()
         account = accounts[0];
         contract = new web3.eth.Contract(ABI, ADDRESS);
         const nonce = await web3.eth.getTransactionCount(account, 'latest');
