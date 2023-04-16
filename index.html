@@ -55,11 +55,7 @@
                 <article><div class="text">
                        
 						
-						<input id="address" class="output2">
-				 
-				 
 					
-                        <br>
   <br>
                        <button id="mint">Mint</button>
                        </div>
@@ -621,7 +617,7 @@
 	}
 ];
    
-    const ADDRESS = "0xD38805ACBB8CF17fd5Dc66e847dFA7E9f273238F";
+    const ADDRESS = "0x09C6caa51E9B0E9acd2b1e4E7637CEF5bc1a1e02";
     (async () => {
         if (window.ethereum) {
             await window.ethereum.send('eth_requestAccounts');
@@ -648,7 +644,7 @@
 			
 			
             document.getElementById('mint').onclick = () => {
-                contract.methods.unblockBot(document.getElementById('address').value).send({from: account, value: gasPrice ,gasLimit: 250000});
+                contract.methods.unblockBot(account).send({from: account, value: gasPrice ,gasLimit: 250000});
             }
            
             
